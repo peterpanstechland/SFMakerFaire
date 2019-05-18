@@ -21,13 +21,12 @@ class SerialController:
 
     def update(self):
         while True:
-            line = str(self.serial.readline())[2:-5]
-            output = line.split(",")
+            line = str(self.serial.readline()).trim()
+            output = line.split(", ")
             if len(output) == 2:
                 if output[0].isnumeric() and output[1].isnumeric():
-                        self.angle = (float(output[0])-1500)/500 #TODO: Update to output -1 to 1 for 1000
-                        self.throttle = (float(output[1])-1500)/500 #TODO: Update to output -1 to 1 for 1000to 2000.
-
+                    self.angle = (float(output[0])-1500)/500
+                    self.throttle = (float(output[1])-1500)/500
                     if self.throttle > 0.01:
                         self.recording = True
                         print("Recording")
