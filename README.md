@@ -27,4 +27,14 @@
 ### Operation
 - STEP 1: Press Power button to turn power for hat and pi
 - STEP 2: login to pi through ssh or using monitor pluged in with HDMI cable
-- STEP 3: ...
+- STEP 3: Copy the serial_controller.py to the python3 donkeycar/parts/ library ~/xx/xx/lib/python3.x/site-packages/donkeycar/parts/
+- STEP 4: 
+```bash
+$ donkey createcar ~/mycar
+```
+- STEP 5: copy the manage.py to ~/mycar
+-STEP 6: start driving
+```bash
+$ cd ~/mycar
+$ python manage.py drive
+```
