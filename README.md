@@ -22,7 +22,7 @@
 - **STEP 3**: plug in ESC Throttle to SERVO2 on hat
 
 <a href="https://raw.githubusercontent.com/peterpanstechland/SFMakerFaire/master/images/IMG_20190520_002159.jpg"><img src="https://raw.githubusercontent.com/peterpanstechland/SFMakerFaire/master/images/IMG_20190520_002159.jpg" width="441.016" height="588.008"/></a>
-![Steering & Throttle connection](/images/IMG_20190520_002319.jpg | small)
+<a href="https://raw.githubusercontent.com/peterpanstechland/SFMakerFaire/master/images/IMG_20190520_002319.jpg"><img src="https://raw.githubusercontent.com/peterpanstechland/SFMakerFaire/master/images/IMG_20190520_002319.jpg" width="441.016" height="588.008"/></a>
 
 ##### Power
 - **STEP 1**: plug in Car Battery to Main power port
