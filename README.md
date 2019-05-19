@@ -20,7 +20,7 @@
 - **STEP 2**: plug in the 5V, GND, CH2 from RC Receiver to RCH2 pin on HAT
 - **STEP 2**: plug in Steering Servo to SERVO1 on hat
 - **STEP 3**: plug in ESC Throttle to SERVO2 on hat
-![RC Channel connection | small](/images/IMG_20190520_002159.jpg)
+!{RC Channel connection | small}(/images/IMG_20190520_002159.jpg)
 ![Steering & Throttle connection | small](/images/IMG_20190520_002319.jpg)
 
 ##### Power
