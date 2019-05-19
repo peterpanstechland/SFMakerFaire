@@ -20,16 +20,16 @@
 - **STEP 2**: plug in the 5V, GND, CH2 from RC Receiver to RCH2 pin on HAT
 - **STEP 2**: plug in Steering Servo to SERVO1 on hat
 - **STEP 3**: plug in ESC Throttle to SERVO2 on hat
-![RC Channel connection](/images/IMG_20190520_002159.jpg)
-![Steering & Throttle connection](/images/IMG_20190520_002319.jpg)
+![RC Channel connection | small](/images/IMG_20190520_002159.jpg)
+![Steering & Throttle connection | small](/images/IMG_20190520_002319.jpg)
 
 ##### Power
 - **STEP 1**: plug in Car Battery to Main power port
 - **STEP 2**: plug in ESC to ESC passthrough port
 - **STEP 3**: plug in LIPO Back up battery
-![Power connection](/images/IMG_20190520_002357.jpg)
-![Power connection 2](/images/IMG_20190520_002400.jpg)
-![Power and backup battery connection](/images/IMG_20190520_002418.jpg)
+![Power connection | small](/images/IMG_20190520_002357.jpg)
+![Power connection 2 | small](/images/IMG_20190520_002400.jpg)
+![Power and backup battery connection | small](/images/IMG_20190520_002418.jpg)
 
 ---
 ### Raspberry PI Setup
