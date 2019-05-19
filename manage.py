@@ -9,28 +9,26 @@ Usage:
 Options:
     -h --help        Show this screen.
     --tub TUBPATHS   List of paths to tubs. Comma separated. Use quotes to use wildcards. ie "~/tubs/*"
+    --js             Use physical joystick.
     --chaos          Add periodic random steering when manually driving
 """
 import os
-
 from docopt import docopt
-import donkeycar as dk
 
+import donkeycar as dk
 from donkeycar.parts.camera import PiCamera
 from donkeycar.parts.transform import Lambda
 from donkeycar.parts.keras import KerasLinear
-from donkeycar.parts.actuator import PCA9685, SerialDevice, PWMSteering, PWMThrottle
+from donkeycar.parts.actuator import PCA9685, PWMSteering, PWMThrottle
+from donkeycar.parts.actuator import RoboHATMM1, SerialDevice
+#from donkeycar.parts.joystick import PS3JoystickController, PS4JoystickController
+from donkeycar.parts.serial_controller import SerialController
 from donkeycar.parts.datastore import TubGroup, TubWriter
 from donkeycar.parts.web_controller import LocalWebController
 from donkeycar.parts.clock import Timestamp
-from donkeycar.parts.datastore import TubGroup, TubWriter
-from donkeycar.parts.keras import KerasLinear
-from donkeycar.parts.transform import Lambda
-from donkeycar.parts.serial_controller import SerialController
 
 
-def drive(cfg, model_path=None, use_chaos=False):
-
+def drive(cfg, model_path=None, use_joystick=False, use_chaos=False):
     """
     Construct a working robotic vehicle from many parts.
     Each part runs as a job in the Vehicle loop, calling either
@@ -49,10 +47,16 @@ def drive(cfg, model_path=None, use_chaos=False):
     cam = PiCamera(resolution=cfg.CAMERA_RESOLUTION)
     V.add(cam, outputs=['cam/image_array'], threaded=True)
 
-    ctr = SerialController()
-    V.add(ctr, outputs=['user/angle', 'user/throttle', 'user/mode', 'recording'], threaded=True)
+    if use_joystick or cfg.USE_JOYSTICK_AS_DEFAULT:
+        #ctr = PS4JoystickController(steering_scale=cfg.JOYSTICK_STEERING_SCALE,
+        #                         auto_record_on_throttle=cfg.AUTO_RECORD_ON_THROTTLE)
+        ctr = SerialController()
+    else:
+        # This web controller will create a web server that is capable
+        # of managing steering, throttle, and modes, and more.
+        ctr = LocalWebController(use_chaos=use_chaos)
 
-    ctr = LocalWebController(use_chaos=use_chaos)
+    ## Create the controller part
     V.add(ctr,
           inputs=['cam/image_array'],
           outputs=['user/angle', 'user/throttle', 'user/mode', 'recording'],
@@ -100,19 +104,36 @@ def drive(cfg, model_path=None, use_chaos=False):
                   'pilot/angle', 'pilot/throttle'],
           outputs=['angle', 'throttle'])
 
-    steering_controller = SerialDevice(cfg.STEERING_CHANNEL)
-    steering = PWMSteering(controller=steering_controller,
-                           left_pulse=cfg.STEERING_LEFT_PWM,
-                           right_pulse=cfg.STEERING_RIGHT_PWM) 
+    ## MUST: choose one of the below controllers
+    actuator_type = cfg.ACTUATOR_MODE # normal, seesaw, serial
 
-    throttle_controller = SerialDevice(cfg.THROTTLE_CHANNEL)
-    throttle = PWMThrottle(controller=throttle_controller,
-                           max_pulse=cfg.THROTTLE_FORWARD_PWM,
-                           zero_pulse=cfg.THROTTLE_STOPPED_PWM,
-                           min_pulse=cfg.THROTTLE_REVERSE_PWM)
+    if actuator_type == 'serial':
+        pass
+        #steering_controller = SerialDevice(cfg.STEERING_CHANNEL)
+        #throttle_controller = SerialDevice(cfg.THROTTLE_CHANNEL)
+    elif actuator_type == 'seesaw':
+        steering_controller = RoboHATMM1(cfg.STEERING_CHANNEL)
+        throttle_controller = RoboHATMM1(cfg.THROTTLE_CHANNEL)
+    else:
+        steering_controller = PCA9685(cfg.STEERING_CHANNEL)
+        throttle_controller = PCA9685(cfg.THROTTLE_CHANNEL)
 
-    V.add(steering, inputs=['angle'])
-    V.add(throttle, inputs=['throttle'])
+    ## This Creates the magic PWM parts for the Controllers above.
+    if actuator_type is not 'serial':
+        steering = PWMSteering(controller=steering_controller,
+                               left_pulse=cfg.STEERING_LEFT_PWM,
+                               right_pulse=cfg.STEERING_RIGHT_PWM)
+
+        throttle = PWMThrottle(controller=throttle_controller,
+                               max_pulse=cfg.THROTTLE_FORWARD_PWM,
+                               zero_pulse=cfg.THROTTLE_STOPPED_PWM,
+                               min_pulse=cfg.THROTTLE_REVERSE_PWM)
+
+        V.add(steering, inputs=['angle'])
+        V.add(throttle, inputs=['throttle'])
+    else:
+       	if model_path:
+            V.add(SerialDevice(), inputs=['angle', 'throttle'])
 
     # add tub to save data
     inputs = ['cam/image_array', 'user/angle', 'user/throttle', 'user/mode', 'timestamp']
@@ -173,16 +194,11 @@ if __name__ == '__main__':
     cfg = dk.load_config()
 
     if args['drive']:
-        drive(cfg, model_path=args['--model'], use_chaos=args['--chaos'])
-        print(pilot_angle)
+        drive(cfg, model_path=args['--model'], use_joystick=args['--js'], use_chaos=args['--chaos'])
+
     elif args['train']:
         tub = args['--tub']
         new_model_path = args['--model']
         base_model_path = args['--base_model']
         cache = not args['--no_cache']
         train(cfg, tub, new_model_path, base_model_path)
-
-
-
-
-
