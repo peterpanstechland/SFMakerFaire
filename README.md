@@ -22,15 +22,15 @@
 - **STEP 3**: plug in ESC Throttle to SERVO2 on hat
 
 <a href="https://raw.githubusercontent.com/peterpanstechland/SFMakerFaire/master/images/IMG_20190520_002159.jpg"><img src="https://raw.githubusercontent.com/peterpanstechland/SFMakerFaire/master/images/IMG_20190520_002159.jpg" width="441.016" height="588.008"/></a>
-<a href="https://raw.githubusercontent.com/peterpanstechland/SFMakerFaire/master/images/IMG_20190520_002319.jpg"><img src="https://raw.githubusercontent.com/peterpanstechland/SFMakerFaire/master/images/IMG_20190520_002319.jpg" width="441.016" height="588.008"/></a>
+<a href="https://raw.githubusercontent.com/peterpanstechland/SFMakerFaire/master/images/IMG_20190520_002319.jpg"><img src="https://raw.githubusercontent.com/peterpanstechland/SFMakerFaire/master/images/IMG_20190520_002319.jpg"/></a>
 
 ##### Power
 - **STEP 1**: plug in Car Battery to Main power port
 - **STEP 2**: plug in ESC to ESC passthrough port
 - **STEP 3**: plug in LIPO Back up battery
-![Power connection | small](/images/IMG_20190520_002357.jpg)
-![Power connection 2 | small](/images/IMG_20190520_002400.jpg)
-![Power and backup battery connection | small](/images/IMG_20190520_002418.jpg)
+<a href="https://raw.githubusercontent.com/peterpanstechland/SFMakerFaire/master/images/IMG_20190520_002357.jpg"><img src="https://raw.githubusercontent.com/peterpanstechland/SFMakerFaire/master/images/IMG_20190520_002357.jpg" width="425.020" height="566.680"/></a>
+<a href="https://raw.githubusercontent.com/peterpanstechland/SFMakerFaire/master/images/IMG_20190520_002400.jpg"><img src="https://raw.githubusercontent.com/peterpanstechland/SFMakerFaire/master/images/IMG_20190520_002400.jpg" width="425.020" height="566.680"/></a>
+<a href="https://raw.githubusercontent.com/peterpanstechland/SFMakerFaire/master/images/IMG_20190520_002418.jpg"><img src="https://raw.githubusercontent.com/peterpanstechland/SFMakerFaire/master/images/IMG_20190520_002418.jpg" width="425.020" height="566.680"/></a>
 
 ---
 ### Raspberry PI Setup
