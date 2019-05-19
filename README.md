@@ -21,7 +21,7 @@
 - **STEP 2**: plug in Steering Servo to SERVO1 on hat
 - **STEP 3**: plug in ESC Throttle to SERVO2 on hat
 
-<a href="https://raw.githubusercontent.com/peterpanstechland/SFMakerFaire/master/images/IMG_20190520_002159.jpg"><img src="https://raw.githubusercontent.com/peterpanstechland/SFMakerFaire/master/images/IMG_20190520_002159.jpg"  style="max-width:50%;" /></a>
+<a href="https://raw.githubusercontent.com/peterpanstechland/SFMakerFaire/master/images/IMG_20190520_002159.jpg"><img src="https://raw.githubusercontent.com/peterpanstechland/SFMakerFaire/master/images/IMG_20190520_002159.jpg" width="441.016" height="588.008"/></a>
 ![Steering & Throttle connection](/images/IMG_20190520_002319.jpg | small)
 
 ##### Power
