@@ -73,7 +73,7 @@ throttle = Control("Throttle", throttle_pwm, throttle_channel, 1000)
 
 def main():
 	global last_update
-
+	
 	data = bytearray('')
 	datastr = ''
 	last_input = 0
@@ -115,7 +115,7 @@ def main():
 				throttle_val = int(datastr[-4:])
 			except ValueError:
 				None
-
+				
 			data=bytearray('')
 			datastr = ''
 			last_input = time.monotonic()
